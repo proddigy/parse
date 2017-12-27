@@ -16,15 +16,6 @@ def get_html(url):
     except requests.exceptions.MissingSchema:
         print('Invalid URL')
 
-def save(names, path):
-    with open(path, 'w') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(('Название', 'Описание'))
-
-        for name in names:
-            writer.writerow((name['title'], ''.join(name['description'])))
-
-
 def parse(html):
     soup = BeautifulSoup(html, 'html.parser')
     names = []
@@ -37,6 +28,14 @@ def parse(html):
         })
         number+=1
     return names
+
+def save(names, path):
+    with open(path, 'w') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(('Название', 'Описание'))
+
+        for name in names:
+            writer.writerow((name['title'], ''.join(name['description'])))
 
 def main():
     save(parse(get_html(url)), 'notebooks.csv')
