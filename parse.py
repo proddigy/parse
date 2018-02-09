@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*- 
 import csv
 from bs4 import BeautifulSoup
 import requests
